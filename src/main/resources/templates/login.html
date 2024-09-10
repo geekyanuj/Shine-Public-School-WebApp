@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Login | Shine Public School</title>
+    <!-- Google fonts -->
+    <link
+            href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap"
+            rel="stylesheet"
+    />
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="./assets/css/style-starter.css"/>
+    <link rel="stylesheet" href="./assets/css/animate.min.css"/>
+
+    <!-- ========== vscode ========== -->
+    <!-- <link rel="stylesheet" href="../static/assets/css/animate.min.css" />
+    <link rel="stylesheet" href="../static/assets/css/style-starter.css" /> -->
+    <!-- =========vscode ========== -->
+</head>
+
+<body>
+<!-- header -->
+<div th:replace="~{header :: header}">...</div>
+<!-- <header id="site-header" class="fixed-top">
+<div class="container">
+<nav class="navbar navbar-expand-lg navbar-light">
+  <a th:href="@{/home}" class="navbar-brand"
+    ><i class="fas fa-graduation-cap"></i>Shine Public School</a
+  >
+  <button
+    class="navbar-toggler collapsed"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarScroll"
+    aria-controls="navbarScroll"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarScroll">
+    <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll">
+      <li class="nav-item">
+        <a
+          th:href="@{/home}"
+          class="nav-link active"
+          aria-current="page"
+          >Home</a
+        >
+      </li>
+      <li class="nav-item">
+        <a th:href="@{/courses}" class="nav-link">Courses</a>
+      </li>
+      <li class="nav-item">
+        <a th:href="@{/contact}" class="nav-link">Contact</a>
+      </li>
+    </ul>
+  </div>
+  toggle switch for light and dark theme
+  <div class="cont-ser-position">
+    <nav class="navigation">
+      <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+          <input type="checkbox" id="checkbox" />
+          <div class="mode-container">
+            <i class="gg-sun"></i>
+            <i class="gg-moon"></i>
+          </div>
+        </label>
+      </div>
+    </nav>
+  </div>
+  //toggle switch for light and dark theme
+</nav>
+</div>
+</header> -->
+<!-- //header -->
+
+<!-- inner banner -->
+<section class="inner-banner py-6 vh-100">
+
+    <!-- Login form -->
+    <div
+            class="mask d-flex align-items-center h-100 gradient-custom-3 py-lg-5 animate__animated"
+            id="loginForm"
+    >
+        <div class="container py-lg-6">
+            <div
+                    class="row d-flex justify-content-center align-items-center h-10"
+            >
+                <div class="col-12 col-md-9 col-sm-2 col-xl-6">
+                    <div class="card" style="border-radius: 15px">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center mb-5 fs-3" id="title">
+                                login
+                            </h2>
+
+                            <form th:action="@{/login}" method="post">
+                                <div data-mdb-input-init class="form-outline mb-1">
+                                    <li class="alert alert-danger" role="alert"
+                                        th:if="${!#strings.isEmpty(errorMessage)}" th:text="${errorMessage}">
+
+                                    </li>
+                                    <li class="alert alert-success" role="alert"
+                                        th:if="${!#strings.isEmpty(successMessage)}" th:text="${successMessage}">
+
+                                    </li>
+                                    <label class="form-label" for="email">Your Email</label>
+                                    <input
+                                            type="text"
+                                            id="email"
+                                            name="username"
+                                            class="form-control form-control-md"
+                                            required
+                                    />
+                                </div>
+
+                                <div data-mdb-input-init class="form-outline mb-2">
+                                    <label class="form-label" for="loginpassword"
+                                    >Password</label>
+
+                                    <input
+                                            type="password"
+                                            id="loginpassword"
+                                            name="password"
+                                            class="form-control form-control-md"
+                                    />
+                                </div>
+                                <!--Hidden form field for csrf tokens-->
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+                                <div class="d-flex justify-content-center mt-4">
+                                    <button
+                                            data-mdb-button-init
+                                            data-mdb-ripple-init
+                                            class="btn btn-primary btn- btn-md gradient-custom-4 text-center mt-2 w-50 rounded-pill"
+                                            id="loginBtn"
+                                    >
+                                        Login
+                                    </button>
+                                </div>
+
+                                <p class="text-center text-muted mt-2 mb-0">
+                                    <a href="#!" class="fw-bold">Forgot Password?</a>
+                                </p>
+                                <div class="mt-4">
+                                    <p>
+                                        New User?
+                                        <a class="fw-bold" id="registerHereBtn"
+                                           th:href="@{/public/register}"
+                                        >Register Here</a
+                                        >
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- //Login Form -->
+    </div>
+</section>
+<!-- //inner banner -->
+
+<!--footer-->
+<div th:replace="~{footer :: footer}">...</div>
+<!--//footer-->
+</body>
+
+<script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function () {
+      scrollFunction();
+    };
+
+    function scrollFunction() {
+      if (
+        document.body.scrollTop > 20 ||
+        document.documentElement.scrollTop > 20
+      ) {
+        document.getElementById("movetop").style.display = "block";
+      } else {
+        document.getElementById("movetop").style.display = "none";
+      }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+</script>
+<!-- //move top -->
+
+<!-- common jquery plugin -->
+<script src="./assets/js/jquery-3.3.1.min.js"></script>
+<!-- //common jquery plugin -->
+
+<!-- /counter-->
+<script src="./assets/js/counter.js"></script>
+<!-- //counter-->
+
+<!-- theme switch js (light and dark)-->
+<script src="./assets/js/theme-change.js"></script>
+<!-- //theme switch js (light and dark)-->
+
+<!-- MENU-JS -->
+<script>
+    $(window).on("scroll", function () {
+      var scroll = $(window).scrollTop();
+
+      if (scroll >= 80) {
+        $("#site-header").addClass("nav-fixed");
+      } else {
+        $("#site-header").removeClass("nav-fixed");
+      }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function () {
+      $("header").toggleClass("active");
+    });
+    $(document).on("ready", function () {
+      if ($(window).width() > 991) {
+        $("header").removeClass("active");
+      }
+      $(window).on("resize", function () {
+        if ($(window).width() > 991) {
+          $("header").removeClass("active");
+        }
+      });
+    });
+</script>
+<!-- //MENU-JS -->
+
+<!-- disable body scroll which navbar is in active -->
+<script>
+    $(function () {
+      $(".navbar-toggler").click(function () {
+        $("body").toggleClass("noscroll");
+      });
+    });
+</script>
+<!-- //disable body scroll which navbar is in active -->
+
+<!-- bootstrap -->
+<script src="assets/js/bootstrap.min.js"/>
+<!-- //bootstrap -->
+</html>
