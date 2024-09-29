@@ -62,3 +62,36 @@ CREATE TABLE IF NOT EXISTS `person`(
     FOREIGN KEY(role_id) REFERENCES roles(role_id),
     FOREIGN KEY(address_id) REFERENCES address(address_id)
 );
+
+CREATE TABLE IF NOT EXISTS `class`(
+    `class_id` int NOT NULL AUTO_INCREMENT ,
+    `name` varchar(100) NOT NULL,
+    `created_at` timestamp NOT NULL,
+    `created_by` varchar(15) NOT NULL,
+    `updated_at` timestamp DEFAULT NULL,
+    `updated_by` varchar(15) DEFAULT NULL,
+    PRIMARY KEY(`class_id`)
+);
+
+ALTER TABLE `person` ADD COLUMN `class_id` int NULL AFTER `address_id`, ADD CONSTRAINT `FK_CLASS_CLASS_ID` FOREIGN KEY (`class_id`) REFERENCES `class`(`class_id`);
+
+
+
+
+CREATE TABLE IF NOT EXISTS `subject`(
+    `subject_id` int NOT NULL AUTO_INCREMENT ,
+    `name` varchar(100) NOT NULL,
+    `created_at` timestamp NOT NULL,
+    `created_by` varchar(15) NOT NULL,
+    `updated_at` timestamp DEFAULT NULL,
+    `updated_by` varchar(15) DEFAULT NULL,
+    PRIMARY KEY(`subject_id`)
+);
+
+CREATE TABLE IF NOT EXISTS `person_subject`(
+    `person_id` int NOT NULL,
+    `subject_id` int NOT NULL,
+    FOREIGN KEY (person_id) REFERENCES person(person_id),
+    FOREIGN KEY (subject_id) REFERENCES subject(subject_id),
+    PRIMARY KEY(`person_id`, `subject_id`)
+);

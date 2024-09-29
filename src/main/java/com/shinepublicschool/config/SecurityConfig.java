@@ -7,6 +7,8 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -74,9 +76,12 @@ public class SecurityConfig {
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/home").permitAll()
                         .requestMatchers("/dashboard").authenticated()
+                        .requestMatchers("/displayProfile").authenticated()
+                        .requestMatchers("/updateProfile").authenticated()
                         .requestMatchers("/displayMessages").hasRole("ADMIN")
                         .requestMatchers("/closeMsg/**").hasRole("ADMIN")
                         .requestMatchers("/reopenMsg/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/error").permitAll()
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/logout").permitAll()
@@ -87,6 +92,7 @@ public class SecurityConfig {
                         .requestMatchers("/about").permitAll()
                         .requestMatchers("/assets/**").permitAll()
                         .requestMatchers("/public/**").permitAll()
+
 //                        .requestMatchers(PathRequest.toH2Console()).permitAll() //no need of it. Since We are using MySQL
                 )
                 .formLogin((formLogin) -> formLogin
@@ -124,4 +130,12 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(admin, user);
 
     }*/
+
+
+    // Used for Password encoder
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
 }

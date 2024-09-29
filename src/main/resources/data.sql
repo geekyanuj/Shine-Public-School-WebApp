@@ -13,3 +13,5 @@ INSERT INTO `holidays`(`day`,`reason`,`type`,`created_at`,`created_by`) VALUES (
 INSERT INTO `roles`(`role_name`,`created_at`,`created_by`) VALUES('ADMIN',CURDATE(),'DBA');
 INSERT INTO `roles`(`role_name`,`created_at`,`created_by`) VALUES('STUDENT',CURDATE(),'DBA');
 INSERT INTO `roles`(`role_name`,`created_at`,`created_by`) VALUES('TEACHER',CURDATE(),'DBA');
+
+INSERT INTO `person`(`name`,`email`,`mobile_num`,`password`,`role_id`,`created_at`,`created_by`) VALUES('ADMIN','admin@cc.cc','1234567897','$2a$12$Vg1zcRoSTp9GCOVYTk/kaeCJE253HRP/hmBRJgZmUaXccZOVNhzYq',1,CURDATE(),'DBA');

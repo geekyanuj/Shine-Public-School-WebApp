@@ -8,9 +8,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-@Data
+@Getter
+@Setter
 @Entity
 @FieldsValueMatch.List({
     @FieldsValueMatch(
@@ -57,4 +60,9 @@ public class Person extends BaseEntity{
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Address.class)
     @JoinColumn(name = "address_id", referencedColumnName = "addressId", nullable = true)
     private Address address;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name ="class_id", referencedColumnName = "classId", nullable = true) // we don't create cascade related config since it will never create class while creating person but vice versa is true
+    private EClass eClass;
+
 }
