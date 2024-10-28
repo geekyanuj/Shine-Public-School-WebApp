@@ -78,6 +78,7 @@ public class SecurityConfig {
                         .requestMatchers("/dashboard").authenticated()
                         .requestMatchers("/displayProfile").authenticated()
                         .requestMatchers("/updateProfile").authenticated()
+                        .requestMatchers("/api/**").authenticated()
                         .requestMatchers("/displayMessages").hasRole("ADMIN")
                         .requestMatchers("/closeMsg/**").hasRole("ADMIN")
                         .requestMatchers("/reopenMsg/**").hasRole("ADMIN")
@@ -93,6 +94,15 @@ public class SecurityConfig {
                         .requestMatchers("/assets/**").permitAll()
                         .requestMatchers("/public/**").permitAll()
 
+                        .requestMatchers("/data-api/**").authenticated()    //this is a base path for all the rest api, if you want to test please specify permit all
+
+
+//                no need of below since we have configured base path for rest APIs
+//                        .requestMatchers("/profile/**").permitAll() //HAL Explorer config
+//                        .requestMatchers("/contacts/**").permitAll() //HAL Explorer config permitting all the path for API
+//                        .requestMatchers("/courseses/**").permitAll() //HAL Explorer config permitting all the path for API
+
+
 //                        .requestMatchers(PathRequest.toH2Console()).permitAll() //no need of it. Since We are using MySQL
                 )
                 .formLogin((formLogin) -> formLogin
@@ -107,7 +117,7 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults()
                 )
 //                .csrf(AbstractHttpConfigurer::disable);
-                .csrf((csrf)->csrf.ignoringRequestMatchers("/saveMsg").ignoringRequestMatchers("/public/**")); //.ignoringRequestMatchers(PathRequest.toH2Console())); //no need of it. Since we are using MySQL
+                .csrf((csrf)->csrf.ignoringRequestMatchers("/saveMsg").ignoringRequestMatchers("/public/**").ignoringRequestMatchers("/api/**").ignoringRequestMatchers("/data-api"));//no need to configure csrf protection for apis         //.ignoringRequestMatchers(PathRequest.toH2Console())); //no need of it. Since we are using MySQL
 //        http.headers((headers)->headers.frameOptions(frameOptionsConfig -> frameOptionsConfig.disable())); //similarly we don't need this frame since we are not using H2 database
         return http.build();
     }

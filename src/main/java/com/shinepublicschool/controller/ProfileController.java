@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
-@Controller
+@Controller("profileControllerBean")  //we changed this default name since the same name bean is created by HAL explored.
 public class ProfileController {
 
     @Autowired
