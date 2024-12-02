@@ -1,0 +1,2 @@
+package com.shinepublicschool.security;public class ShinePublicSchoolNonProdUsernamePasswordAuthenticationProvider {
+}
