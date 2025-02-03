@@ -93,6 +93,7 @@ public class SecurityConfig {
                         .requestMatchers("/about").permitAll()
                         .requestMatchers("/assets/**").permitAll()
                         .requestMatchers("/public/**").permitAll()
+                        .requestMatchers("/actuator/**").hasRole("ADMIN")
 
                         .requestMatchers("/data-api/**").authenticated()    //this is a base path for all the rest api, if you want to test please specify permit all
 

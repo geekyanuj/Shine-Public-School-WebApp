@@ -42,6 +42,7 @@ public class ContactService {
 
     public List<Contact> findMsgsWithOpenStatus() {
         return contactRepository.findByStatus(ShinePublicSchoolConstants.OPEN);
+
     }
 
     public List<Contact> findMsgsWithClosedStatus() {

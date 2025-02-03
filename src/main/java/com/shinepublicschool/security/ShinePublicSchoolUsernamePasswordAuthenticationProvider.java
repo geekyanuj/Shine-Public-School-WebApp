@@ -4,6 +4,7 @@ import com.shinepublicschool.model.Person;
 import com.shinepublicschool.model.Roles;
 import com.shinepublicschool.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Profile("prod")  // conditional creating bean for only prod profile
 public class ShinePublicSchoolUsernamePasswordAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
