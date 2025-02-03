@@ -14,4 +14,5 @@ INSERT INTO `roles`(`role_name`,`created_at`,`created_by`) VALUES('ADMIN',CURDAT
 INSERT INTO `roles`(`role_name`,`created_at`,`created_by`) VALUES('STUDENT',CURDATE(),'DBA');
 INSERT INTO `roles`(`role_name`,`created_at`,`created_by`) VALUES('TEACHER',CURDATE(),'DBA');
 
+insert into address(address_id,created_at,created_by,address1,address2,city,state,zip_code) values(0,curdate(),'DBA','NA','NA','NA','NA','NA');
 INSERT INTO `person`(`name`,`email`,`mobile_num`,`password`,`role_id`,`created_at`,`created_by`) VALUES('ADMIN','admin@cc.cc','1234567897','$2a$12$Vg1zcRoSTp9GCOVYTk/kaeCJE253HRP/hmBRJgZmUaXccZOVNhzYq',1,CURDATE(),'DBA');
