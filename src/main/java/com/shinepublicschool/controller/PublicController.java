@@ -11,6 +11,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import com.shinepublicschool.model.Roles;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @Controller
@@ -21,7 +23,12 @@ public class PublicController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String displayRegisterPage(Model model){
-        model.addAttribute("person",new Person());
+
+        Person person = new Person();
+        person.setRoles(new Roles());
+
+        model.addAttribute("person", person);
+
         return "register";
     }
 
@@ -36,5 +43,34 @@ public class PublicController {
         }else {
             return "register";
         }
+    }
+
+    @RequestMapping(value = "/forgot-password", method = RequestMethod.GET)
+    public String showForgotPasswordPage() {
+        return "forgot-password";
+    }
+
+    @RequestMapping(value = "/forgot-password", method = RequestMethod.POST)
+    public String processForgotPassword(
+            @RequestParam String email,
+            @RequestParam String newPassword,
+            @RequestParam String confirmPassword,
+            Model model
+    ) {
+
+        if (!newPassword.equals(confirmPassword)) {
+            model.addAttribute("error", "Passwords do not match!");
+            return "forgot-password";
+        }
+
+        boolean isUpdated = personService.resetPassword(email, newPassword);
+
+        if (!isUpdated) {
+            model.addAttribute("error", "Email not found!");
+            return "forgot-password";
+        }
+
+        model.addAttribute("success", "Password updated successfully!");
+        return "forgot-password";
     }
 }

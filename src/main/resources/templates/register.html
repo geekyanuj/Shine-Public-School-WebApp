@@ -107,6 +107,21 @@ z                                    />
                                             required
                                     />
                                 </div>
+                                <div data-mdb-input-init class="form-outline mb-2">
+                                    <label class="form-label" for="role">Role</label>
+
+                                    <select
+                                            th:field="*{roles.roleName}"
+                                            id="role"
+                                            class="form-select form-select-md"
+                                            required
+                                    >
+                                        <option value="">Select Role</option>
+                                        <option value="ADMIN">Admin</option>
+                                        <option value="STUDENT">Student</option>
+                                        <option value="TEACHER">Teacher</option>
+                                    </select>
+                                </div>
 
                                 <div
                                         class="form-check d-flex justify-content-center mt-3 mb-3"

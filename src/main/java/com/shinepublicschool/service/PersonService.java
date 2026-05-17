@@ -24,15 +24,35 @@ public class PersonService {
     private PasswordEncoder passwordEncoder;
 
     public boolean createNewPerson(Person person) {
-        boolean isSaved = false;
-        Roles role = rolesRepository.getByRoleName(ShinePublicSchoolConstants.STUDENT_ROLE);
+
+        String roleName = person.getRoles().getRoleName();
+
+        Roles role = rolesRepository.getByRoleName(roleName);
+
+        if(role == null){
+            throw new RuntimeException("Role not found: " + roleName);
+        }
+
         person.setRoles(role);
-        person.setPassword(passwordEncoder.encode(person.getPassword())); //used to set the hashed password to DB
+
+        person.setPassword(passwordEncoder.encode(person.getPassword()));
+
         person = personRepository.save(person);
 
-        if (null != person && person.getPersonId() > 0) {
-            isSaved = true;
+        return person.getPersonId() > 0;
+    }
+
+    public boolean resetPassword(String email, String newPassword) {
+
+        Person person = personRepository.readByEmail(email);
+
+        if (person == null) {
+            return false;
         }
-        return isSaved;
+
+        person.setPassword(passwordEncoder.encode(newPassword));
+        personRepository.save(person);
+
+        return true;
     }
 }

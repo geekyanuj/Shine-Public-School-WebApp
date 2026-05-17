@@ -23,8 +23,14 @@ public class DashboardController {
         model.addAttribute("username",person.getName());
         model.addAttribute("roles",authentication.getAuthorities().toString().replaceAll("[ROLE_]",""));
         httpSession.setAttribute("loggedInPerson", person);
+        logMessesges();
         return "dashboard";
     }
 
+
+    public void logMessesges(){
+        log.info("info");
+        log.trace("tracce");
+    }
 
 }

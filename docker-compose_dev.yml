@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: school-mysql
+    restart: always
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: shine_school
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
