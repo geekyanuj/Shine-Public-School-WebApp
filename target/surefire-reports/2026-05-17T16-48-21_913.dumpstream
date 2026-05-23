@@ -1,5 +1,0 @@
-# Created at 2026-05-17T16:48:22.070
-Boot Manifest-JAR contains absolute paths in classpath 'A:\Shine-Public-School-WebApp Final for AWS Deployment\target\test-classes'
-Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
-'other' has different root
-
